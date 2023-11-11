@@ -2,11 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Persona extends Model
 {
     use HasFactory;
     protected $table = "personas";
+    /**
+     * Get the miembro associated with the Persona
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function miembro(): HasOne
+    {
+        return $this->hasOne(Miembro::class, 'id', 'id');
+    }
 }

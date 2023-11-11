@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\Api\MiembroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +18,10 @@ use App\Http\Controllers\Api\PhotoController;
 |
 */
 
-
-Route::get("/personas", [AuthController::class, "obtenerPersonas"]);
+Route::prefix('miembro')->group(function () {
+    Route::get("/listar", [MiembroController::class, "listar"]);
+    Route::post("/registrar", [MiembroController::class, "registrar"]);
+    Route::get("/obtener/{id}", [MiembroController::class, "obtener"]);
+    Route::put("/editar/{id}", [MiembroController::class, "editar"]);
+    Route::delete("/eliminar/{id}", [MiembroController::class, "eliminar"]);
+});
