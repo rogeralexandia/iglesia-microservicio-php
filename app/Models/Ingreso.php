@@ -10,4 +10,9 @@ class Ingreso extends Model
     use HasFactory;
     protected $table = "ingresos";
     protected $fillable = ['nombre'];
+
+    public function actividades()
+    {
+        return $this->belongsToMany(Actividad::class)->withPivot('monto')->withTimestamps();
+    }
 }

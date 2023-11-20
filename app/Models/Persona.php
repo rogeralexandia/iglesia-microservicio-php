@@ -19,4 +19,10 @@ class Persona extends Model
     {
         return $this->hasOne(Miembro::class, 'id', 'id');
     }
+
+    public function actividades()
+    {
+        return $this->belongsToMany(Actividad::class,'asistencias', 'persona_id', 'actividad_id')->withPivot('horallegada')->withTimestamps();
+    }
+
 }

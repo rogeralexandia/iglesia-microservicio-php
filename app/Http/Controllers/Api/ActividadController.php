@@ -93,4 +93,5 @@ class ActividadController extends Controller
             return $this->error('Error al eliminar la actividad', $e->getMessage(), 500);
         }
     }
+
 }

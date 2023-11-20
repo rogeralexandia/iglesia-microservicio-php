@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ActividadController;
+use App\Http\Controllers\Api\AsistenciaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\IngresoController;
 use App\Http\Controllers\Api\PhotoController;
 use App\Http\Controllers\Api\MiembroController;
+use App\Http\Controllers\Api\RecaudacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +46,17 @@ Route::prefix('ingreso')->group(function () {
     Route::get("/obtener/{id}", [IngresoController::class, "obtener"]);
     Route::put("/editar/{id}", [IngresoController::class, "editar"]);
     Route::delete("/eliminar/{id}", [IngresoController::class, "eliminar"]);
+});
+
+Route::prefix('recaudacion')->group(function () {
+    Route::get('/actividad/{id}',[RecaudacionController::class, "listar"]);
+    Route::post("/registrar", [RecaudacionController::class, "registrar"]);
+    Route::post("/eliminar", [RecaudacionController::class, "eliminar"]);
+    Route::post("/mostrar", [RecaudacionController::class, "mostrar"]);
+});
+Route::prefix('asistencia')->group(function () {
+    Route::get('/actividad/{id}',[AsistenciaController::class, "listar"]);
+    Route::post("/registrar", [AsistenciaController::class, "registrar"]);
+    Route::post("/eliminar", [AsistenciaController::class, "eliminar"]);
+    Route::post("/mostrar", [AsistenciaController::class, "mostrar"]);
 });
