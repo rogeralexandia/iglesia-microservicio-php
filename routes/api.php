@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\PhotoController;
 use App\Http\Controllers\Api\MiembroController;
+use App\Http\Controllers\Api\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,6 @@ Route::prefix('miembro')->group(function () {
     Route::put("/editar/{id}", [MiembroController::class, "editar"]);
     Route::delete("/eliminar/{id}", [MiembroController::class, "eliminar"]);
 });
+
+Route::post("/login", [UsuarioController::class, "login"]);
+Route::post("/usuario/register", [UsuarioController::class, "register"]);
