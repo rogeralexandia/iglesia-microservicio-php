@@ -32,6 +32,7 @@ Route::prefix('miembro')->group(function () {
 });
 
 Route::post("/login", [UsuarioController::class, "login"]);
+Route::post("/loginMiembro", [UsuarioController::class, "loginMiembro"]);
 Route::post("/usuario/register", [UsuarioController::class, "register"]);
 //gestionar actividad
 Route::prefix('actividad')->group(function () {
@@ -63,3 +64,5 @@ Route::prefix('asistencia')->group(function () {
     Route::post("/eliminar", [AsistenciaController::class, "eliminar"]);
     Route::post("/mostrar", [AsistenciaController::class, "mostrar"]);
 });
+
+Route::get("/igualar-montototal", [UsuarioController::class, "igualar"]);

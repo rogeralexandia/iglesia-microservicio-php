@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class MiembroController extends Controller
 {
@@ -36,6 +37,7 @@ class MiembroController extends Controller
             $persona->sexo = $request->sexo;
             $persona->fecha_nacimiento = $request->fecha_nacimiento;
             $persona->tipo = "M";
+            $persona->password = Hash::make($request->celular); 
             $persona->save();
             $idModeloPersona = $persona->id;
             $miembro = new Miembro;
@@ -64,6 +66,7 @@ class MiembroController extends Controller
             $persona->apellido = $request->apellido;
             $persona->celular = $request->celular;
             $persona->correo = $request->correo;
+            $persona->password = Hash::make($request->celular); 
             $persona->direccion = $request->direccion;
             $persona->sexo = $request->sexo;
             $persona->fecha_nacimiento = $request->fecha_nacimiento;

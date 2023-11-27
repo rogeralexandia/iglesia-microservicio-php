@@ -42,6 +42,30 @@ class UsuarioController extends Controller
         );
     }
 
+    public function loginMiembro(Request $request): JsonResponse {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error(
+                "Rellena el correo y password",
+                false
+            );
+        }
+        $usuario = Persona::where('correo', $request->email)->first();
+        if (!$usuario || !Hash::check($request->password, $usuario->password)) {
+            return $this->error(
+                "Credenciales incorrectas",
+                false
+            );
+        }
+        return $this->success(
+            "Inicio de sesion correcto",
+            $usuario
+        );
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -67,4 +91,22 @@ class UsuarioController extends Controller
             $user
         );
     }
+    public function igualar(Request $request)
+    {
+        $actividades = DB::table('actividades')->get();
+
+        foreach ($actividades as $actividad) {
+            $montoTotal = DB::table('actividad_ingreso')
+                ->where('actividad_id', $actividad->id)
+                ->sum('monto');
+
+            DB::table('actividades')
+                ->where('id', $actividad->id)
+                ->update(['montototal' => $montoTotal]);
+        }
+        return $this->success(
+            "Realizado correctamente"
+        );
+    }
+    
 }
