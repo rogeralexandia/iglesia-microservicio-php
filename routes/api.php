@@ -23,6 +23,10 @@ use App\Http\Controllers\Api\RecaudacionController;
 |
 */
 
+Route::get("/",function(){
+   return "Bienvenido a el microservicio de la iglesia en PHP";
+});
+
 Route::prefix('miembro')->group(function () {
     Route::get("/listar", [MiembroController::class, "listar"]);
     Route::post("/registrar", [MiembroController::class, "registrar"]);

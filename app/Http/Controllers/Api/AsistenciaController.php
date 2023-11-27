@@ -38,7 +38,7 @@ class AsistenciaController extends Controller
         $persona = Persona::find($request->persona_id);
 
         if ($actividad->personas()->where('persona_id', $persona->id)->exists()) {
-            return $this->error('La relación ya existe', [], 422);
+            return $this->error('La asistencia ya fué registrada', [], 422);
         }
         $asistencia = $actividad->personas()->attach($persona, ['horallegada' => $request->horallegada]);
 
