@@ -24,6 +24,7 @@ class RecaudacionController extends Controller
     }
     public function registrar(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'actividad_id' => 'required|exists:actividades,id',
             'ingreso_id' => 'required|exists:ingresos,id',
@@ -38,7 +39,7 @@ class RecaudacionController extends Controller
         $ingreso = Ingreso::find($request->ingreso_id);
 
         if ($actividad->ingresos()->where('ingreso_id', $ingreso->id)->exists()) {
-            return $this->error('La relación ya existe', [], 422);
+            return $this->error('La recaudación ya fué registrada', [], 422);
         }
 
         $recaudacion = $actividad->ingresos()->attach($ingreso, ['monto' => $request->monto]);
@@ -71,6 +72,7 @@ class RecaudacionController extends Controller
 
     public function eliminar(Request $request)
     {
+       
         $validator = Validator::make($request->all(), [
             'actividad_id' => 'required|exists:actividades,id',
             'ingreso_id' => 'required|exists:ingresos,id',
